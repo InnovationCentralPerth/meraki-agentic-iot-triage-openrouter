@@ -1,0 +1,16 @@
+[Unit]
+Description=Meraki IoT Triage — Dashboard
+After=network-online.target mcp_stub.service
+Wants=network-online.target mcp_stub.service
+
+[Service]
+Type=simple
+User=<user>
+WorkingDirectory=/opt/meraki-iot-triage
+EnvironmentFile=/opt/meraki-iot-triage/.env
+ExecStart=/opt/meraki-iot-triage/.venv/bin/uvicorn server:app --host 0.0.0.0 --port 8090
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

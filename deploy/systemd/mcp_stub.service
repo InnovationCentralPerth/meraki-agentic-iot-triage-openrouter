@@ -1,0 +1,16 @@
+[Unit]
+Description=Meraki IoT Triage — MCP Stub (Slack alerts)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=<user>
+WorkingDirectory=/opt/meraki-iot-triage
+EnvironmentFile=/opt/meraki-iot-triage/.env
+ExecStart=/opt/meraki-iot-triage/.venv/bin/uvicorn mcp_stub:app --host 127.0.0.1 --port 8889
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
